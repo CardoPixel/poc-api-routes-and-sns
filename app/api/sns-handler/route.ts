@@ -30,16 +30,26 @@ export async function POST(request: Request) {
             logToClients("☑️ Subscription confirmed successfully");
             return NextResponse.json({ message: "✅ Subscription confirmed" });
         } else if (type === "Notification") {
-            const messageContent = JSON.parse(body.Message.default);
-            console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
-            logToClients(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
-            const metadata = messageContent.metadata;
-            const checkoutUrl = messageContent.checkoutUrl;
-            console.log('📦 Extracted metadata: ', metadata); // Logging extracted metadata
-            console.log('📋 Checkout URL: ', checkoutUrl); // Logging checkout URL
-            logToClients("📦 Extracted metadata: " + metadata);
-            logToClients("📋 Checkout URL: " + checkoutUrl);
-            return NextResponse.json({ metadata, checkoutUrl });
+            try {
+                const messageContent = JSON.parse(JSON.parse(body.Message).default);
+                console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
+                logToClients(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
+
+                const metadata = messageContent.metadata;
+                const checkoutUrl = messageContent.checkoutUrl;
+
+                console.log('📦 Extracted metadata: ', metadata); // Logging extracted metadata
+                console.log('📋 Checkout URL: ', checkoutUrl); // Logging checkout URL
+
+                logToClients("📦 Extracted metadata: " + metadata);
+                logToClients("📋 Checkout URL: " + checkoutUrl);
+
+                return NextResponse.json({ metadata, checkoutUrl });
+            } catch (error) {
+                console.error('❌ Error processing SNS message:', error); // Logging processing error
+                logToClients("❌ Error processing SNS message: " + (error as Error).toString());
+                return NextResponse.json({ error: "❌ Invalid SNS message" });
+            }
         } else {
             console.warn('⚠️ Unhandled SNS message type:', type); // Logging unhandled message type
             logToClients("⚠️ Unhandled SNS message type: " + type);
