@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Redirector() {
     const router = useRouter();
-    const { metadata, setMetadata } = useMetadataStore();
+    const { metadata, setMetadata, checkoutUrl } = useMetadataStore();
 
     useEffect(() => {
         const fetchSNSMessage = async () => {
@@ -15,7 +15,7 @@ export default function Redirector() {
                 const { metadata, checkoutUrl } = await response.json();
 
                 if (metadata && checkoutUrl) {
-                    setMetadata(metadata);
+                    setMetadata(metadata, checkoutUrl);
                     // Perform any additional checks here if necessary
                     router.push(checkoutUrl);
                 }
