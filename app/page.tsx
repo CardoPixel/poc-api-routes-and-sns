@@ -11,7 +11,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
-    const source = new EventSource("/api/sns-handler/logs");
+    const source = new EventSource("/api/sns-handler");
 
     source.onmessage = function (event) {
       const newLog = event.data;
