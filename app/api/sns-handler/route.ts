@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-    console.log(`📩 Recieved POST request: ${request}`);
+    console.log(`📩 Recieved POST request: ${JSON.stringify(request)}`);
     try {
         const body = await request.json();
         const type = body.Type; // Access the 'Type' field from the SNS message
