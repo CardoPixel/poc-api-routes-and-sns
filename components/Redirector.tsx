@@ -1,12 +1,17 @@
+// File: components/Redirector.tsx
 'use client';
-
 import { useEffect } from 'react';
-import { useMetadataStore } from '@/store/usePoCStore';
 import { useRouter } from 'next/navigation';
+import { Metadata } from '@/types/Metadata';
 
-export default function Redirector() {
+interface RedirectorProps {
+    metadata: Metadata; // Replace YourMetadataType with the actual type of metadata
+    checkoutUrl: string; // Assuming checkoutUrl is a string
+    setMetadata: (metadata: Metadata, checkoutUrl: string) => void; // Define the function signature
+}
+
+const Redirector: React.FC<RedirectorProps> = ({ metadata, checkoutUrl, setMetadata }) => {
     const router = useRouter();
-    const { metadata, setMetadata, checkoutUrl } = useMetadataStore();
 
     useEffect(() => {
         const fetchSNSMessage = async () => {
@@ -29,3 +34,5 @@ export default function Redirector() {
 
     return null;
 }
+
+export default Redirector;
