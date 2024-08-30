@@ -1,27 +1,31 @@
+// File: app/page.tsx
 "use client";
-import React, { useEffect, useState } from 'react';
-import Redirector from '@/components/Redirector';
+import React, { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [logs, setLogs] = useState<string[]>([]);
 
+  // Logger utility function to send logs to the HomePage component
+  const sendLogToHomePage = (log: string) => {
+    setLogs((prevLogs) => [...prevLogs, log]);
+  };
+
   useEffect(() => {
-    const source = new EventSource('/api/sns-handlers/logs'); // Establishing a connection to stream logs
+    const source = new EventSource("/api/sns-handler/logs");
 
     source.onmessage = function (event) {
       const newLog = event.data;
-      setLogs(prevLogs => [...prevLogs, newLog]); // Update logs with the new log message
+      sendLogToHomePage(newLog); // Send the new log to the HomePage component
     };
 
     return () => {
-      source.close(); // Closing the connection when the component unmounts
+      source.close();
     };
   }, []);
 
   return (
     <main>
       <h1>Welcome to the Checkout System</h1>
-      <Redirector />
       <div>
         <h2>Logs:</h2>
         <ul>

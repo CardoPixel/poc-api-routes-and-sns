@@ -1,4 +1,3 @@
 {
-    "Type": "Notification",
-    "Message": "{\"metadata\": \"sample metadata\", \"checkoutUrl\": \"https://poc-api-routes-and-sns.vercel.app/checkout\"}"
+    "default": "{\"metadata\": \"sample metadata\", \"checkoutUrl\": \"https://poc-api-routes-and-sns.vercel.app/checkout\"}"
 }
