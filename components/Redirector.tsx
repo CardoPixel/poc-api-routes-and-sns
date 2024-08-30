@@ -16,7 +16,7 @@ const Redirector: React.FC<RedirectorProps> = ({ metadata, checkoutUrl, setMetad
     useEffect(() => {
         const fetchSNSMessage = async () => {
             try {
-                const response = await fetch('/api/sns-handler', { method: 'POST' });
+                const response = await fetch('/api/sns-handler', { method: 'GET' }); // Change method to GET
                 const { metadata, checkoutUrl } = await response.json();
 
                 if (metadata && checkoutUrl) {
