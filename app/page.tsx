@@ -1,38 +1,19 @@
 // File: app/page.tsx
 "use client";
 import React, { useEffect, useState } from "react";
+import { useMetadataStore } from "@/store/usePoCStore"; // Import the zustand store
 
 export default function HomePage() {
-  const [logs, setLogs] = useState<string[]>([]);
-
-  // Logger utility function to send logs to the HomePage component
-  const sendLogToHomePage = (log: string) => {
-    setLogs((prevLogs) => [...prevLogs, log]);
-  };
-
-  useEffect(() => {
-    const source = new EventSource("/api/sns-handler");
-
-    source.onmessage = function (event) {
-      const newLog = event.data;
-      sendLogToHomePage(newLog); // Send the new log to the HomePage component
-    };
-
-    return () => {
-      source.close();
-    };
-  }, []);
+  const { metadata, checkoutUrl } = useMetadataStore(); // Access the metadata state from the zustand store
 
   return (
     <main>
       <h1>Welcome to the Checkout System</h1>
+
       <div>
-        <h2>Logs:</h2>
-        <ul>
-          {logs.map((log, index) => (
-            <li key={index}>{log}</li>
-          ))}
-        </ul>
+        <h2>Metadata:</h2>
+        <p>{metadata ? JSON.stringify(metadata) : "No metadata available"}</p>
+        <p>{checkoutUrl ? JSON.stringify(checkoutUrl) : "No checkoutUrl available"}</p>
       </div>
     </main>
   );

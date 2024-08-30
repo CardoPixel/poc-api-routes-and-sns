@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useMetadataStore } from '@/store/useMetadataStore';
+import { useMetadataStore } from '@/store/usePoCStore';
 import { useRouter } from 'next/navigation';
 
 export default function Redirector() {
