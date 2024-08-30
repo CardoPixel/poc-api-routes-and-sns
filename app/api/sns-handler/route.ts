@@ -4,6 +4,7 @@ export async function POST(request: Request) {
     console.log('📩 Recieved POST request:', request); // Logging the raw POST request
     try {
         const body = await request.json();
+        console.log('📋 Parsed body: ', JSON.stringify(body));
         const type = body.Type; // Access the 'Type' field from the SNS message
         console.log('🔎 Received SNS message type:', type); // Logging the SNS message type
 
@@ -15,9 +16,10 @@ export async function POST(request: Request) {
             console.log('☑️ Subscription confirmed successfully');
             return NextResponse.json({ message: '✅ Subscription confirmed' });
         } else if (type === 'Notification') {
-            console.log(`📥 Received Notification message: ${JSON.stringify(body)}`);
             const messageContent = body.Message;
+            console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
             const parsedMessage = JSON.parse(messageContent);
+            console.log('📋 parsedMessage: ', JSON.stringify(messageContent));
             const metadata = parsedMessage.metadata;
             const checkoutUrl = parsedMessage.checkoutUrl;
             console.log('📦 Extracted metadata: ', metadata); // Logging extracted metadata
