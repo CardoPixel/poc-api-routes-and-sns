@@ -1,11 +1,11 @@
 // File: app/page.tsx
 "use client";
 import React from "react";
-import { useMetadataStore } from "@/store/usePoCStore"; // Import the zustand store
+import { useMetadataStore } from "@/store/usePoCStore";
 import Redirector from "@/components/Redirector";
 
 export default function HomePage() {
-  const { metadata, checkoutUrl, setMetadata } = useMetadataStore(); // Access the metadata state from the zustand store
+  const { metadata, checkoutUrl, setMetadata } = useMetadataStore();
 
   return (
     <main>
@@ -16,7 +16,7 @@ export default function HomePage() {
         <p>{metadata ? JSON.stringify(metadata) : "No metadata available"}</p>
         <p>{checkoutUrl ? JSON.stringify(checkoutUrl) : "No checkoutUrl available"}</p>
       </div>
-      <Redirector metadata={metadata!} checkoutUrl={checkoutUrl!} setMetadata={setMetadata} />
+      <Redirector setMetadata={setMetadata} />
     </main>
   );
 }

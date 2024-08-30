@@ -1,14 +1,18 @@
-import { create } from 'zustand';
-import { Metadata } from '@/types/Metadata';
+// File: store/usePoCStore.ts
+import { create } from 'zustand'; // Updated import statement
+
+interface Metadata {
+    // Define the structure of your metadata here
+}
 
 interface MetadataState {
     metadata: Metadata | null;
-    checkoutUrl: string | null; // Add checkoutUrl field
-    setMetadata: (metadata: Metadata, checkoutUrl?: string) => void; // Update setMetadata function signature
+    checkoutUrl: string | null;
+    setMetadata: (metadata: Metadata, checkoutUrl: string) => void;
 }
 
 export const useMetadataStore = create<MetadataState>((set) => ({
     metadata: null,
-    checkoutUrl: null, // Initialize checkoutUrl to null
-    setMetadata: (metadata, checkoutUrl) => set({ metadata, checkoutUrl }), // Update setMetadata function to accept checkoutUrl
+    checkoutUrl: null,
+    setMetadata: (metadata, checkoutUrl) => set({ metadata, checkoutUrl }),
 }));
