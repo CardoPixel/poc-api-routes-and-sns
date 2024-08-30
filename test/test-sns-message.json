@@ -1,0 +1,13 @@
+{
+    "Type": "Notification",
+    "MessageId": "11111111-1111-1111-1111-111111111111",
+    "TopicArn": "arn:aws:sns:us-east-1:123456789012:my-topic",
+    "Subject": "Test Notification",
+    "Message": "{\"metadata\":{\"orderId\":\"1234\",\"userId\":\"5678\",\"amount\":99.99},\"checkoutUrl\":\"https://example.com/checkout/1234\"}",
+    "Timestamp": "2024-08-30T12:34:56.789Z",
+    "SignatureVersion": "1",
+    "Signature": "EXAMPLEpH+..",
+    "SigningCertURL": "https://sns.us-east-1.amazonaws.com/SimpleNotificationService-111111111111111111111111111111.pem",
+    "UnsubscribeURL": "https://sns.us-east-1.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-east-1:123456789012:my-topic:11111111-1111-1111-1111-111111111111",
+    "MessageAttributes": {}
+}
