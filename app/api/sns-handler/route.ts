@@ -30,7 +30,7 @@ export async function POST(request: Request) {
             logToClients("☑️ Subscription confirmed successfully");
             return NextResponse.json({ message: "✅ Subscription confirmed" });
         } else if (type === "Notification") {
-            const messageContent = JSON.parse(body.Message);
+            const messageContent = JSON.parse(body.Message.default);
             console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
             logToClients(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
             const metadata = messageContent.metadata;
