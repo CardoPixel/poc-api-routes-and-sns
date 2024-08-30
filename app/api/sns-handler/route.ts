@@ -19,7 +19,7 @@ export async function POST(request: Request) {
             const messageContent = body.Message;
             console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
             const parsedMessage = JSON.parse(messageContent);
-            console.log('📋 parsedMessage: ', JSON.stringify(messageContent));
+            console.log('📋 parsedMessage: ', JSON.stringify(parsedMessage));
             const metadata = parsedMessage.metadata;
             const checkoutUrl = parsedMessage.checkoutUrl;
             console.log('📦 Extracted metadata: ', metadata); // Logging extracted metadata
