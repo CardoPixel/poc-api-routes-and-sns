@@ -22,10 +22,10 @@ export async function POST(request: Request) {
             return NextResponse.json({ message: "✅ Subscription confirmed" });
         } else if (type === "Notification") {
             try {
-                const messageContent = JSON.parse(body.Message);
+                const messageContent = JSON.parse(JSON.parse(body.Message).default);
                 console.log(`📥 Received Notification message: ${JSON.stringify(messageContent)}`);
-                storedMetadata = messageContent.default.metadata;
-                storedCheckoutUrl = messageContent.default.checkoutUrl;
+                storedMetadata = messageContent.metadata;
+                storedCheckoutUrl = messageContent.checkoutUrl;
                 console.log('📦 Extracted metadata: ', storedMetadata);
                 console.log('📋 Checkout URL: ', storedCheckoutUrl);
                 return NextResponse.json({ metadata: storedMetadata, checkoutUrl: storedCheckoutUrl });
